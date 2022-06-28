@@ -4,12 +4,12 @@ class SmoothHighlight extends StatefulWidget {
   const SmoothHighlight({
     super.key,
     required this.child,
-    this.highlightColor,
+    required this.highlightColor,
     this.enabled = true,
   });
 
   final Widget child;
-  final Color? highlightColor;
+  final Color highlightColor;
   final bool enabled;
 
   @override
@@ -22,31 +22,28 @@ class _SmoothHighlightState extends State<SmoothHighlight>
     vsync: this,
     duration: const Duration(milliseconds: 500),
   );
-  late final Animation<Decoration> _animation;
+  late final Animation<Decoration> _animation = _animationController
+      .drive(
+        CurveTween(curve: Curves.easeInOut),
+      )
+      .drive(
+        DecorationTween(
+          begin: const BoxDecoration(),
+          end: BoxDecoration(
+            color: widget.highlightColor,
+          ),
+        ),
+      );
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
     if (!widget.enabled) {
-      _animationController.dispose();
       return;
     }
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _animationController.forward();
     });
-
-    _animation = _animationController
-        .drive(
-          CurveTween(curve: Curves.easeInOut),
-        )
-        .drive(
-          DecorationTween(
-            begin: const BoxDecoration(),
-            end: BoxDecoration(
-              color: widget.highlightColor ?? Theme.of(context).primaryColor,
-            ),
-          ),
-        );
     _animation.addStatusListener((status) async {
       if (status == AnimationStatus.completed) {
         await Future<void>.delayed(const Duration(milliseconds: 200));
