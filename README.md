@@ -15,12 +15,11 @@ and the Flutter guide for
 
 You can emphasize a specific widget by ***highlight animation*** when you want to emphasize something to your users. As you can see from the following samples, you can use `smooth_highlight` in any widget.
 
-And also, you can use `ValueChangeHighlight` that is useful when you simply want to highlight only the text changes(refer to Sample2). It is inspired by the Firestore value change animation in the Firebase console.
+And also, you can use `ValueChangeHighlight` that is useful when you simply want to highlight only the text changes(refer to Sample2). It is inspired by the Cloud Firestore value change animation in the Firebase console.
 
 | Sample1 | Sample2 | Sample3 |
 | --- | --- | --- |
 | ![](https://user-images.githubusercontent.com/12729025/185746812-58353f9b-1de7-458e-9319-64444cac48b9.gif) | ![](https://user-images.githubusercontent.com/12729025/185746818-ffe72f20-2acf-4f48-80f7-d039757aa71b.gif) | ![](https://user-images.githubusercontent.com/12729025/185746809-777d992d-d791-4d92-b555-594bdd51c106.gif) |
-
 
 ## Usage
 
@@ -65,3 +64,9 @@ ValueChangeHighlight(
   disableValues: const [null, 2],
 );
 ```
+
+## UseCase
+
+Following gif is Firestore GUI in Firebase Console. Firestore realtime listener is powerful, but it is hard for your user to see ***what value changed***. You can make the user notice by highlighting the changed value. It's probably a user-friendly consideration, I think.
+
+![](https://user-images.githubusercontent.com/12729025/185757958-a0aef8e1-855a-47b0-b99c-7dad5010e2d0.gif)
