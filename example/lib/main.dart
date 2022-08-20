@@ -21,7 +21,7 @@ class App extends StatelessWidget {
         useMaterial3: true,
         dividerTheme: const DividerThemeData(space: 0),
       ),
-      home: const _ListViewExample(),
+      home: const _ValueChangeExample(),
     );
   }
 }
@@ -108,30 +108,52 @@ class _ContainerExampleState extends State<_ContainerExample> {
   }
 }
 
-class _TextChangeExample extends StatefulWidget {
-  const _TextChangeExample();
+class _ValueChangeExample extends StatefulWidget {
+  const _ValueChangeExample();
 
   @override
-  State<_TextChangeExample> createState() => _TextChangeExampleState();
+  State<_ValueChangeExample> createState() => _ValueChangeExampleState();
 }
 
-class _TextChangeExampleState extends State<_TextChangeExample> {
+class _ValueChangeExampleState extends State<_ValueChangeExample> {
   var count = 0;
+  var canUpdate = true;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: SmoothHighlight(
-          padding: const EdgeInsets.all(4),
-          highlightColor: Colors.yellow,
-          child: Text('count: $count'),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ValueChangeHighlight(
+              value: count,
+              padding: const EdgeInsets.all(4),
+              highlightColor: Colors.yellow,
+              child: Text(
+                'count: $count',
+                style: theme.textTheme.titleLarge,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'highlight: ${!canUpdate}',
+              ),
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            count++;
+            // if canUpdate is false, this widget rebuilds but cannot show highlight.
+            if (canUpdate) {
+              count++;
+            }
+            canUpdate = !canUpdate;
           });
         },
         child: const Icon(Icons.refresh),

@@ -22,6 +22,7 @@ class SmoothHighlight extends StatefulWidget {
 
 class _SmoothHighlightState extends State<SmoothHighlight>
     with SingleTickerProviderStateMixin {
+  String? previousValue;
   late final _animationController = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 500),
@@ -57,10 +58,10 @@ class _SmoothHighlightState extends State<SmoothHighlight>
 
   @override
   void didUpdateWidget(covariant SmoothHighlight oldWidget) {
+    super.didUpdateWidget(oldWidget);
     if (widget.enabled) {
       _animationController.forward();
     }
-    super.didUpdateWidget(oldWidget);
   }
 
   @override
