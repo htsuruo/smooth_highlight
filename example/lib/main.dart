@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_highlight/smooth_highlight.dart';
 
 void main() {
   runApp(
@@ -20,19 +21,21 @@ class App extends StatelessWidget {
         useMaterial3: true,
         dividerTheme: const DividerThemeData(space: 0),
       ),
-      home: const _HomePage(),
+      home: const _ListViewExample(),
     );
   }
 }
 
-class _HomePage extends StatefulWidget {
-  const _HomePage();
+class _ListViewExample extends StatefulWidget {
+  const _ListViewExample();
 
   @override
-  State<_HomePage> createState() => _HomePageState();
+  State<_ListViewExample> createState() => _ListViewExampleState();
 }
 
-class _HomePageState extends State<_HomePage> {
+class _ListViewExampleState extends State<_ListViewExample> {
+  int targetIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,19 +43,97 @@ class _HomePageState extends State<_HomePage> {
         title: const Text('SmoothHighlight'),
       ),
       body: ListView.separated(
-        itemCount: 10,
+        itemCount: 30,
         separatorBuilder: (context, _) => const Divider(),
         itemBuilder: (context, index) {
-          final target = index == 2;
-          return ListTile(
-            title: Text('index: ${index + 1}'),
-            subtitle: Text(target ? 'highlight tile' : 'normal tile'),
-            onTap: () {},
+          return SmoothHighlight(
+            enabled: index == targetIndex,
+            highlightColor: Colors.yellow,
+            child: ListTile(
+              title: Text('index: ${index + 1}'),
+              onTap: () {},
+            ),
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            targetIndex++;
+          });
+        },
+        child: const Icon(Icons.refresh),
+      ),
+    );
+  }
+}
+
+class _ContainerExample extends StatefulWidget {
+  const _ContainerExample();
+
+  @override
+  State<_ContainerExample> createState() => _ContainerExampleState();
+}
+
+class _ContainerExampleState extends State<_ContainerExample> {
+  var count = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: SmoothHighlight(
+          enabled: count % 2 != 0,
+          highlightColor: Colors.orange,
+          child: Container(
+            width: 100,
+            height: 100,
+            margin: const EdgeInsets.all(40),
+            color: Colors.green,
+            child: Center(
+              child: Text('count: $count'),
+            ),
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            count++;
+          });
+        },
+        child: const Icon(Icons.refresh),
+      ),
+    );
+  }
+}
+
+class _TextChangeExample extends StatefulWidget {
+  const _TextChangeExample();
+
+  @override
+  State<_TextChangeExample> createState() => _TextChangeExampleState();
+}
+
+class _TextChangeExampleState extends State<_TextChangeExample> {
+  var count = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: SmoothHighlight(
+          padding: const EdgeInsets.all(4),
+          highlightColor: Colors.yellow,
+          child: Text('count: $count'),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            count++;
+          });
+        },
         child: const Icon(Icons.refresh),
       ),
     );

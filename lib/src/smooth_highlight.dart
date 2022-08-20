@@ -6,11 +6,15 @@ class SmoothHighlight extends StatefulWidget {
     required this.child,
     required this.highlightColor,
     this.enabled = true,
+    this.padding = EdgeInsets.zero,
+    this.useInitialHighLight = false,
   });
 
   final Widget child;
   final Color highlightColor;
   final bool enabled;
+  final bool useInitialHighLight;
+  final EdgeInsets padding;
 
   @override
   State<SmoothHighlight> createState() => _SmoothHighlightState();
@@ -38,18 +42,25 @@ class _SmoothHighlightState extends State<SmoothHighlight>
   @override
   void initState() {
     super.initState();
-    if (!widget.enabled) {
-      return;
+    if (widget.useInitialHighLight) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _animationController.forward();
+      });
     }
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _animationController.forward();
-    });
     _animation.addStatusListener((status) async {
       if (status == AnimationStatus.completed) {
         await Future<void>.delayed(const Duration(milliseconds: 200));
         await _animationController.reverse();
       }
     });
+  }
+
+  @override
+  void didUpdateWidget(covariant SmoothHighlight oldWidget) {
+    if (widget.enabled) {
+      _animationController.forward();
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -60,11 +71,13 @@ class _SmoothHighlightState extends State<SmoothHighlight>
 
   @override
   Widget build(BuildContext context) {
+    final child = Padding(padding: widget.padding, child: widget.child);
+
     return widget.enabled
         ? DecoratedBoxTransition(
             decoration: _animation,
-            child: widget.child,
+            child: child,
           )
-        : widget.child;
+        : child;
   }
 }
