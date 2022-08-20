@@ -13,7 +13,7 @@ and the Flutter guide for
 
 # Smooth Highlight
 
-You can emphasize a specific widget by ***highlight animation*** when you want to emphasize something to your users.As you can see from the following samples, you can use `smooth_highlight` in any widget.
+You can emphasize a specific widget by ***highlight animation*** when you want to emphasize something to your users. As you can see from the following samples, you can use `smooth_highlight` in any widget.
 
 And also, you can use `ValueChangeHighlight` that is useful when you simply want to highlight only the text changes(refer to Sample2). It is inspired by the Firestore value change animation in the Firebase console.
 
