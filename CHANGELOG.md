@@ -1,4 +1,4 @@
-## 0.0.2
+## 0.0.3
 
 * Rename property name `highlightColor` to `color` due to redundant.
 
