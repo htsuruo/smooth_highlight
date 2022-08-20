@@ -42,7 +42,8 @@ class _ValueChangeHighlight<T> extends State<ValueChangeHighlight>
       return;
     }
 
-    _valueChanged = widget.disableValues?.contains(_previousValue) == false;
+    final disableValues = widget.disableValues ?? [];
+    _valueChanged = disableValues.contains(_previousValue) == false;
     _previousValue = widget.value;
   }
 

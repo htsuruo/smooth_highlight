@@ -21,7 +21,7 @@ class App extends StatelessWidget {
         useMaterial3: true,
         dividerTheme: const DividerThemeData(space: 0),
       ),
-      home: const _ValueChangeCustomExample(),
+      home: const _ValueChangeExample(),
     );
   }
 }
