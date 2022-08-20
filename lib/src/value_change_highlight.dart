@@ -7,11 +7,13 @@ class ValueChangeHighlight<T> extends StatefulWidget {
     required this.value,
     required this.child,
     required this.highlightColor,
+    this.allowFromNull = true,
     this.padding = EdgeInsets.zero,
     this.useInitialHighLight = false,
   });
 
   final T? value;
+  final bool allowFromNull;
   final Widget child;
   final Color highlightColor;
   final bool useInitialHighLight;
@@ -36,11 +38,10 @@ class _ValueChangeHighlight<T> extends State<ValueChangeHighlight>
   void didUpdateWidget(covariant ValueChangeHighlight oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (_previousValue != widget.value) {
-      _previousValue = widget.value;
-
-      if (_previousValue != null) {
+      if (_previousValue != null || widget.allowFromNull) {
         _valueChanged = true;
       }
+      _previousValue = widget.value;
     } else {
       _valueChanged = false;
     }

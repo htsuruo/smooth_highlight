@@ -116,7 +116,7 @@ class _ValueChangeExample extends StatefulWidget {
 }
 
 class _ValueChangeExampleState extends State<_ValueChangeExample> {
-  var count = 0;
+  int? count;
   var canUpdate = true;
   @override
   Widget build(BuildContext context) {
@@ -151,7 +151,7 @@ class _ValueChangeExampleState extends State<_ValueChangeExample> {
           setState(() {
             // if canUpdate is false, this widget rebuilds but cannot show highlight.
             if (canUpdate) {
-              count++;
+              count == null ? count = 0 : count = count! + 1;
             }
             canUpdate = !canUpdate;
           });
