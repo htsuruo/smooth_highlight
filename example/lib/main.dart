@@ -86,7 +86,6 @@ class _ListViewExampleState extends State<_ListViewExample> {
         separatorBuilder: (context, _) => const Divider(),
         itemBuilder: (context, index) {
           return SmoothHighlight(
-            useInitialHighLight: true,
             enabled: index == targetIndex,
             highlightColor: Colors.yellow,
             child: ListTile(
@@ -127,6 +126,7 @@ class _ContainerExampleState extends State<_ContainerExample> {
       ),
       body: Center(
         child: SmoothHighlight(
+          useInitialHighLight: true,
           highlightColor: Colors.orange,
           child: Container(
             width: 100,
