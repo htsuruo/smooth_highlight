@@ -21,7 +21,7 @@ class App extends StatelessWidget {
         useMaterial3: true,
         dividerTheme: const DividerThemeData(space: 0),
       ),
-      home: const _ValueChangeExample(),
+      home: const _ValueChangeCustomExample(),
     );
   }
 }
@@ -40,7 +40,7 @@ class _ListViewExampleState extends State<_ListViewExample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SmoothHighlight'),
+        title: const Text('ListViewExample'),
       ),
       body: ListView.separated(
         itemCount: 30,
@@ -80,7 +80,9 @@ class _ContainerExampleState extends State<_ContainerExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('ContainerExample'),
+      ),
       body: Center(
         child: SmoothHighlight(
           enabled: count % 2 != 0,
@@ -116,13 +118,15 @@ class _ValueChangeExample extends StatefulWidget {
 }
 
 class _ValueChangeExampleState extends State<_ValueChangeExample> {
-  int? count;
+  var count = 0;
   var canUpdate = true;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('ValueChangeExample'),
+      ),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -151,9 +155,51 @@ class _ValueChangeExampleState extends State<_ValueChangeExample> {
           setState(() {
             // if canUpdate is false, this widget rebuilds but cannot show highlight.
             if (canUpdate) {
-              count == null ? count = 0 : count = count! + 1;
+              count++;
             }
             canUpdate = !canUpdate;
+          });
+        },
+        child: const Icon(Icons.refresh),
+      ),
+    );
+  }
+}
+
+class _ValueChangeCustomExample extends StatefulWidget {
+  const _ValueChangeCustomExample();
+
+  @override
+  State<_ValueChangeCustomExample> createState() =>
+      _ValueChangeCustomExampleState();
+}
+
+class _ValueChangeCustomExampleState extends State<_ValueChangeCustomExample> {
+  int? count;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('ValueChangeCustomExample'),
+      ),
+      body: Center(
+        child: ValueChangeHighlight(
+          value: count,
+          // disable highlight if count changes from `null` or `2`.
+          disableValues: const [null, 2],
+          padding: const EdgeInsets.all(4),
+          highlightColor: Colors.yellow,
+          child: Text(
+            'count: $count',
+            style: theme.textTheme.titleLarge,
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            count == null ? count = 0 : count = count! + 1;
           });
         },
         child: const Icon(Icons.refresh),
