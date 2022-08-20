@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_highlight/smooth_highlight.dart';
+import 'package:touch_indicator/touch_indicator.dart';
 
 void main() {
   runApp(const App());
@@ -10,8 +11,16 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final routes = <String, WidgetBuilder>{
+      _ListViewExample.title: (context) => const _ListViewExample(),
+      _ContainerExample.title: (context) => const _ContainerExample(),
+      _ValueChangeExample.title: (context) => const _ValueChangeExample(),
+      _ValueChangeCustomExample.title: (context) =>
+          const _ValueChangeCustomExample(),
+    };
+    final pages = routes.entries.toList();
     return MaterialApp(
-      // debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.from(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
@@ -20,44 +29,28 @@ class App extends StatelessWidget {
       ).copyWith(
         dividerTheme: const DividerThemeData(space: 0),
       ),
-      home: const HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final pages = <String, Widget>{
-      _ListViewExample.title: const _ListViewExample(),
-      _ContainerExample.title: const _ContainerExample(),
-      _ValueChangeExample.title: const _ValueChangeExample(),
-      _ValueChangeCustomExample.title: const _ValueChangeCustomExample(),
-    }.entries.toList();
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Smooth Highlight'),
-      ),
-      body: ListView.separated(
-        itemCount: pages.length,
-        separatorBuilder: (context, _) => const Divider(),
-        itemBuilder: (context, index) {
-          final page = pages[index];
-          return ListTile(
-            title: Text(page.key),
-            trailing: const Icon(Icons.navigate_next),
-            onTap: () {
-              Navigator.of(context).push<void>(
-                MaterialPageRoute(
-                  builder: (context) => page.value,
-                ),
-              );
-            },
-          );
-        },
+      routes: routes,
+      builder: ((context, child) => TouchIndicator(
+            child: child!,
+          )),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Smooth Highlight'),
+        ),
+        body: ListView.separated(
+          itemCount: pages.length,
+          separatorBuilder: (context, _) => const Divider(),
+          itemBuilder: (context, index) {
+            final page = pages[index];
+            return ListTile(
+              title: Text(page.key),
+              trailing: const Icon(Icons.navigate_next),
+              onTap: () {
+                Navigator.of(context).pushNamed(page.key);
+              },
+            );
+          },
+        ),
       ),
     );
   }
@@ -117,32 +110,51 @@ class _ContainerExample extends StatefulWidget {
 }
 
 class _ContainerExampleState extends State<_ContainerExample> {
-  var count = 0;
+  final _highlight = false;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     return Scaffold(
       appBar: AppBar(
         title: const Text(_ContainerExample.title),
       ),
       body: Center(
-        child: SmoothHighlight(
-          useInitialHighLight: true,
-          highlightColor: Colors.orange,
-          child: Container(
-            width: 100,
-            height: 100,
-            margin: const EdgeInsets.all(10),
-            color: Colors.green,
-            child: Center(
-              child: Text('count: $count'),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SmoothHighlight(
+              useInitialHighLight: true,
+              highlightColor: Colors.yellow,
+              child: Container(
+                width: 100,
+                height: 100,
+                margin: const EdgeInsets.all(10),
+                color: colorScheme.primary,
+                child: Center(
+                  child: Text(
+                    'Highlight Object',
+                    style: TextStyle(
+                      color: colorScheme.onPrimary,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
             ),
-          ),
+            Container(
+              width: 100,
+              height: 100,
+              margin: const EdgeInsets.all(10),
+              color: colorScheme.primary,
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            count++;
+            _highlight == !_highlight;
           });
         },
         child: const Icon(Icons.refresh),
