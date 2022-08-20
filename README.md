@@ -28,7 +28,7 @@ And also, you can use `ValueChangeHighlight` that is useful when you simply want
 ```dart
 SmoothHighlight(
   // set your custom color
-  highlightColor: Colors.yellow,
+  color: Colors.yellow,
   child: Text('Hightlight'),
 );
 ```
@@ -39,7 +39,7 @@ SmoothHighlight(
 ValueChangeHighlight(
   // highlight if count changes
   value: count,
-  highlightColor: Colors.yellow,
+  color: Colors.yellow,
   child: Text('count: $count'),
 );
 ```

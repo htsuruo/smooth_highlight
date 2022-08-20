@@ -4,16 +4,34 @@ class SmoothHighlight extends StatefulWidget {
   const SmoothHighlight({
     super.key,
     required this.child,
-    required this.highlightColor,
+    required this.color,
     this.enabled = true,
-    this.padding = EdgeInsets.zero,
     this.useInitialHighLight = false,
+    this.padding = EdgeInsets.zero,
   });
 
+  /// Highlight target widget.
+  ///
+  /// If child has no size, it will be nothing happened.
   final Widget child;
-  final Color highlightColor;
+
+  /// The highlight color.
+  ///
+  /// If [enabled] is false, this color is not used.
+  final Color color;
+
+  /// Whether this highlight is enabled.
+  ///
+  /// If false, the child does not be highlight at all. default to true.
+  /// Ex. `enabled: count % 2 ==0` means that highlight if count is only even.
   final bool enabled;
+
+  /// Whether this highlight works also in initState phase.
+  ///
+  /// If true, the highlight will be applied to the child in initState phase. default to false.
   final bool useInitialHighLight;
+
+  /// The padding of the highlight.
   final EdgeInsets padding;
 
   @override
@@ -35,7 +53,7 @@ class _SmoothHighlightState extends State<SmoothHighlight>
         DecorationTween(
           begin: const BoxDecoration(),
           end: BoxDecoration(
-            color: widget.highlightColor,
+            color: widget.color,
           ),
         ),
       );

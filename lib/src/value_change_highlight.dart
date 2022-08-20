@@ -1,21 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_highlight/smooth_highlight.dart';
 
+/// If you want to highlight the child when the value is changed, [ValueChangeHighlight] is useful.
 class ValueChangeHighlight<T> extends StatefulWidget {
   const ValueChangeHighlight({
     super.key,
     required this.value,
     required this.child,
-    required this.highlightColor,
+    required this.color,
     this.disableValues,
     this.padding = EdgeInsets.zero,
     this.useInitialHighLight = false,
   });
 
+  /// The value change that triggers the highlight.
+  ///
+  /// It is implemented based on `operator==`, so it can be any primitive type.
+  /// If you use your custom class, you should override `operator==` method.
   final T? value;
+
+  /// The values you don't want to highlight.
+  ///
+  /// The values you set this property, [child] will not be highlighted when changes from these values.
+  /// Ex. `disableValues: const [null, 2]` means that disable highlight if count changes from `null` or `2`.
   final List<T>? disableValues;
   final Widget child;
-  final Color highlightColor;
+  final Color color;
   final bool useInitialHighLight;
   final EdgeInsets padding;
 
@@ -52,7 +62,7 @@ class _ValueChangeHighlight<T> extends State<ValueChangeHighlight>
     return SmoothHighlight(
       enabled: _valueChanged,
       padding: widget.padding,
-      highlightColor: widget.highlightColor,
+      color: widget.color,
       child: widget.child,
     );
   }

@@ -80,7 +80,7 @@ class _ListViewExampleState extends State<_ListViewExample> {
         itemBuilder: (context, index) {
           return SmoothHighlight(
             enabled: index == targetIndex,
-            highlightColor: Colors.yellow,
+            color: Colors.yellow,
             child: ListTile(
               title: Text('index: $index'),
               onTap: () {},
@@ -125,7 +125,7 @@ class _ContainerExampleState extends State<_ContainerExample> {
           children: [
             SmoothHighlight(
               useInitialHighLight: true,
-              highlightColor: Colors.yellow,
+              color: Colors.yellow,
               child: Container(
                 width: 100,
                 height: 100,
@@ -190,7 +190,7 @@ class _ValueChangeExampleState extends State<_ValueChangeExample> {
             ValueChangeHighlight(
               value: count,
               padding: const EdgeInsets.all(4),
-              highlightColor: Colors.yellow,
+              color: Colors.yellow,
               child: Text(
                 'count: $count',
                 style: theme.textTheme.titleLarge,
@@ -246,7 +246,7 @@ class _ValueChangeCustomExampleState extends State<_ValueChangeCustomExample> {
           // disable highlight if count changes from `null` or `2`.
           disableValues: const [null, 2],
           padding: const EdgeInsets.all(4),
-          highlightColor: Colors.yellow,
+          color: Colors.yellow,
           child: Text(
             'count: $count',
             style: theme.textTheme.titleLarge,
