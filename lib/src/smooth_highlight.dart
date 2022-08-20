@@ -22,7 +22,7 @@ class SmoothHighlight extends StatefulWidget {
 
 class _SmoothHighlightState extends State<SmoothHighlight>
     with SingleTickerProviderStateMixin {
-  String? previousValue;
+  bool _disposed = false;
   late final _animationController = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 500),
@@ -51,7 +51,11 @@ class _SmoothHighlightState extends State<SmoothHighlight>
     _animation.addStatusListener((status) async {
       if (status == AnimationStatus.completed) {
         await Future<void>.delayed(const Duration(milliseconds: 200));
-        await _animationController.reverse();
+        // this is workaround for following error occurs if you use in ListView scroll:
+        // `called after AnimationController.dispose() AnimationController methods should not be used after calling dispose.`
+        if (!_disposed) {
+          await _animationController.reverse();
+        }
       }
     });
   }
@@ -67,6 +71,7 @@ class _SmoothHighlightState extends State<SmoothHighlight>
   @override
   void dispose() {
     _animationController.dispose();
+    _disposed = true;
     super.dispose();
   }
 
