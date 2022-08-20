@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_highlight/smooth_highlight.dart';
 
 void main() {
-  runApp(
-    const App(),
-  );
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
@@ -13,21 +11,62 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // debugShowCheckedModeBanner: false,
       theme: ThemeData.from(
+        useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.green,
         ),
       ).copyWith(
-        useMaterial3: true,
         dividerTheme: const DividerThemeData(space: 0),
       ),
-      home: const _ValueChangeExample(),
+      home: const HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final pages = <String, Widget>{
+      _ListViewExample.title: const _ListViewExample(),
+      _ContainerExample.title: const _ContainerExample(),
+      _ValueChangeExample.title: const _ValueChangeExample(),
+      _ValueChangeCustomExample.title: const _ValueChangeCustomExample(),
+    }.entries.toList();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Smooth Highlight'),
+      ),
+      body: ListView.separated(
+        itemCount: pages.length,
+        separatorBuilder: (context, _) => const Divider(),
+        itemBuilder: (context, index) {
+          final page = pages[index];
+          return ListTile(
+            title: Text(page.key),
+            trailing: const Icon(Icons.navigate_next),
+            onTap: () {
+              Navigator.of(context).push<void>(
+                MaterialPageRoute(
+                  builder: (context) => page.value,
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
 
 class _ListViewExample extends StatefulWidget {
   const _ListViewExample();
+
+  static const title = 'ListViewExample';
 
   @override
   State<_ListViewExample> createState() => _ListViewExampleState();
@@ -40,17 +79,18 @@ class _ListViewExampleState extends State<_ListViewExample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ListViewExample'),
+        title: const Text(_ListViewExample.title),
       ),
       body: ListView.separated(
         itemCount: 30,
         separatorBuilder: (context, _) => const Divider(),
         itemBuilder: (context, index) {
           return SmoothHighlight(
+            useInitialHighLight: true,
             enabled: index == targetIndex,
             highlightColor: Colors.yellow,
             child: ListTile(
-              title: Text('index: ${index + 1}'),
+              title: Text('index: $index'),
               onTap: () {},
             ),
           );
@@ -71,6 +111,8 @@ class _ListViewExampleState extends State<_ListViewExample> {
 class _ContainerExample extends StatefulWidget {
   const _ContainerExample();
 
+  static const title = 'ContainerExample';
+
   @override
   State<_ContainerExample> createState() => _ContainerExampleState();
 }
@@ -81,16 +123,15 @@ class _ContainerExampleState extends State<_ContainerExample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ContainerExample'),
+        title: const Text(_ContainerExample.title),
       ),
       body: Center(
         child: SmoothHighlight(
-          enabled: count % 2 != 0,
           highlightColor: Colors.orange,
           child: Container(
             width: 100,
             height: 100,
-            margin: const EdgeInsets.all(40),
+            margin: const EdgeInsets.all(10),
             color: Colors.green,
             child: Center(
               child: Text('count: $count'),
@@ -113,6 +154,8 @@ class _ContainerExampleState extends State<_ContainerExample> {
 class _ValueChangeExample extends StatefulWidget {
   const _ValueChangeExample();
 
+  static const title = 'ValueChangeExample';
+
   @override
   State<_ValueChangeExample> createState() => _ValueChangeExampleState();
 }
@@ -125,7 +168,7 @@ class _ValueChangeExampleState extends State<_ValueChangeExample> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ValueChangeExample'),
+        title: const Text(_ValueChangeExample.title),
       ),
       body: Center(
         child: Column(
@@ -169,6 +212,8 @@ class _ValueChangeExampleState extends State<_ValueChangeExample> {
 class _ValueChangeCustomExample extends StatefulWidget {
   const _ValueChangeCustomExample();
 
+  static const title = 'ValueChangeCustomExample';
+
   @override
   State<_ValueChangeCustomExample> createState() =>
       _ValueChangeCustomExampleState();
@@ -181,7 +226,7 @@ class _ValueChangeCustomExampleState extends State<_ValueChangeCustomExample> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ValueChangeCustomExample'),
+        title: const Text(_ValueChangeCustomExample.title),
       ),
       body: Center(
         child: ValueChangeHighlight(
