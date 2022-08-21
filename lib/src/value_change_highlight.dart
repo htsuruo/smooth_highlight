@@ -8,6 +8,7 @@ class ValueChangeHighlight<T> extends StatefulWidget {
     required this.value,
     required this.child,
     required this.color,
+    this.enabled = true,
     this.disableFromValues,
     this.padding = EdgeInsets.zero,
     this.useInitialHighLight = false,
@@ -26,6 +27,7 @@ class ValueChangeHighlight<T> extends StatefulWidget {
   final List<T>? disableFromValues;
   final Widget child;
   final Color color;
+  final bool enabled;
   final bool useInitialHighLight;
   final EdgeInsets padding;
 
@@ -47,7 +49,7 @@ class _ValueChangeHighlight<T> extends State<ValueChangeHighlight>
   @override
   void didUpdateWidget(covariant ValueChangeHighlight oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (_previousValue == widget.value) {
+    if (_previousValue == widget.value || !widget.enabled) {
       _valueChanged = false;
       return;
     }
