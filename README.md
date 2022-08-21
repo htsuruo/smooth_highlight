@@ -23,23 +23,12 @@ And also, you can use `ValueChangeHighlight` that is useful when you simply want
 
 ## Usage
 
-`SmoothHighlight` is just wrap your widget.
+You just wrap `SmoothHighlight` in your widget.
 ```dart
 SmoothHighlight(
   // set your custom color
   color: Colors.yellow,
   child: Text('Hightlight'),
-);
-```
-
-`ValueChangeHighlight` requires highlight trigger value.
-
-```dart
-ValueChangeHighlight(
-  // highlight if count changes
-  value: count,
-  color: Colors.yellow,
-  child: Text('count: $count'),
 );
 ```
 
@@ -55,13 +44,25 @@ SmoothHighlight(
 );
 ```
 
-if you don't want to highlight a specific values, `disableValues` property prevents it.
+### ValueChangeHighlight
+If you want to highlight the widget only the value changed, `ValueChangeHighlight` is useful. It requires highlight trigger value.
+
+```dart
+ValueChangeHighlight(
+  // highlight if count changes
+  value: count,
+  color: Colors.yellow,
+  child: Text('count: $count'),
+);
+```
+
+if you don't want to highlight a specific values, `disableFromValues` property prevents it.
 ```dart
 ValueChangeHighlight(
   value: count,
 
-  // disable highlight if count changes from `null` or `2`.
-  disableValues: const [null, 2],
+  // disable highlight if count changes from `null` or `2` to some value.
+  disableFromValues: const [null, 2],
 );
 ```
 

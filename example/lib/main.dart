@@ -244,7 +244,7 @@ class _ValueChangeCustomExampleState extends State<_ValueChangeCustomExample> {
         child: ValueChangeHighlight(
           value: count,
           // disable highlight if count changes from `null` or `2`.
-          disableValues: const [null, 2],
+          disableFromValues: const [null, 2],
           padding: const EdgeInsets.all(4),
           color: Colors.yellow,
           child: Text(
