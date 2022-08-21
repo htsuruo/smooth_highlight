@@ -1,3 +1,7 @@
+## Unreleased
+
+* Add `enable` property in ValueChangeHighlight.
+
 ## 0.0.4
 
 * Rename from `disableValues` to `disableFromValues`.
