@@ -1,6 +1,6 @@
 ## Unreleased
 
-* Add `enable` property in ValueChangeHighlight.
+* Add `enabled` property in ValueChangeHighlight.
 
 ## 0.0.4
 
