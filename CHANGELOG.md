@@ -5,15 +5,15 @@
 ## 0.0.4
 
 * Rename from `disableValues` to `disableFromValues`.
-* Edit README.
+* Update README.
 ## 0.0.3
 
 * Rename property name from `highlightColor` to `color` due to redundant.
 
 ## 0.0.2
 
-* Edit description.
+* Update description.
 
 ## 0.0.1
 
-* Initial commit.
+* Initial release.
