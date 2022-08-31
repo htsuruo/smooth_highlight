@@ -1,3 +1,6 @@
+## 0.0.6
+* Revert to Dart 2.17.5 due to described `UNKNOWN PLATFORMS` in pub.dev
+
 ## 0.0.5
 
 * Upgrade to Flutter 3.3, Dart 2.18
