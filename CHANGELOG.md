@@ -1,5 +1,6 @@
-## Unreleased
+## 0.0.5
 
+* Upgrade to Flutter 3.3, Dart 2.18
 * Add `enabled` property in ValueChangeHighlight.
 
 ## 0.0.4

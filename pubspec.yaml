@@ -1,6 +1,6 @@
 name: smooth_highlight
 description: Emphasize a specific widget by highlight animation.
-version: 0.0.4
+version: 0.0.5
 homepage: https://github.com/HTsuruo/smooth_highlight
 
 environment:
