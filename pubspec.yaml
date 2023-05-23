@@ -1,5 +1,5 @@
 name: smooth_highlight
-description: Emphasize a specific widget by highlight animation.
+description: This package allows you to emphasize a specific widget by highlight animation when you want to emphasize something to your users.
 version: 0.1.0
 repository: https://github.com/HTsuruo/smooth_highlight
 screenshots:
