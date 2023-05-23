@@ -1,16 +1,3 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
 # Smooth Highlight
 
 You can emphasize a specific widget by ***highlight animation*** when you want to emphasize something to your users. As you can see from the following samples, you can use `smooth_highlight` in any widget.
@@ -24,6 +11,7 @@ And also, you can use `ValueChangeHighlight` that is useful when you simply want
 ## Usage
 
 You just wrap `SmoothHighlight` in your widget.
+
 ```dart
 SmoothHighlight(
   // set your custom color
@@ -39,12 +27,13 @@ SmoothHighlight(
   // highlight in initState phase.
   useInitialHighLight: true,
 
-  // highlight if count is only even.
+  // highlight whenever count is even.
   enabled: count % 2 ==0,
 );
 ```
 
 ### ValueChangeHighlight
+
 If you want to highlight the widget only the value changed, `ValueChangeHighlight` is useful. It requires highlight trigger value.
 
 ```dart
@@ -57,6 +46,7 @@ ValueChangeHighlight(
 ```
 
 if you don't want to highlight a specific values, `disableFromValues` property prevents it.
+
 ```dart
 ValueChangeHighlight(
   value: count,

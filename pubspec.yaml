@@ -2,6 +2,13 @@ name: smooth_highlight
 description: Emphasize a specific widget by highlight animation.
 version: 0.0.7
 repository: https://github.com/HTsuruo/smooth_highlight
+screenshots:
+  - description: 'Highlights a specific `ListTile` inside `ListView`.'
+    path: screenshots/list_view_example.gif
+  - description: 'Highlights count when a specific other property is modified'
+    path: screenshots/value_change_example.gif
+  - description: 'Highlights the `Container` widget'
+    path: screenshots/container_example.gif
 
 environment:
   sdk: '>=2.18.0 <4.0.0'
