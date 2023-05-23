@@ -163,6 +163,7 @@ class _ContainerExampleState extends State<_ContainerExample> {
   }
 }
 
+/// Highlights whenever count changes if `highlight` property changes true.
 class _ValueChangeExample extends StatefulWidget {
   const _ValueChangeExample();
 
@@ -174,7 +175,7 @@ class _ValueChangeExample extends StatefulWidget {
 
 class _ValueChangeExampleState extends State<_ValueChangeExample> {
   var count = 0;
-  var canUpdate = true;
+  var highlight = true;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -182,37 +183,48 @@ class _ValueChangeExampleState extends State<_ValueChangeExample> {
       appBar: AppBar(
         title: const Text(_ValueChangeExample.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ValueChangeHighlight(
-              value: count,
-              padding: const EdgeInsets.all(4),
-              color: Colors.yellow,
-              child: Text(
-                'count: $count',
-                style: theme.textTheme.titleLarge,
+      body: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              'This example highlights whenever count changes if `highlight` property is true.',
+            ),
+          ),
+          Expanded(
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ValueChangeHighlight(
+                    value: count,
+                    padding: const EdgeInsets.all(4),
+                    color: Colors.yellow,
+                    child: Text(
+                      'count: $count',
+                      style: theme.textTheme.titleLarge,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'highlight: ${!highlight}',
+                    ),
+                  ),
+                ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'highlight: ${!canUpdate}',
-              ),
-            ),
-          ],
-        ),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            // if canUpdate is false, this widget rebuilds but cannot show highlight.
-            if (canUpdate) {
+            // if `highlight` is false, this widget rebuilds but cannot show highlight.
+            if (highlight) {
               count++;
             }
-            canUpdate = !canUpdate;
+            highlight = !highlight;
           });
         },
         child: const Icon(Icons.refresh),
@@ -221,6 +233,7 @@ class _ValueChangeExampleState extends State<_ValueChangeExample> {
   }
 }
 
+/// Highlights whenever count changes unless count `null` or `2`
 class _ValueChangeCustomExample extends StatefulWidget {
   const _ValueChangeCustomExample();
 
@@ -240,18 +253,30 @@ class _ValueChangeCustomExampleState extends State<_ValueChangeCustomExample> {
       appBar: AppBar(
         title: const Text(_ValueChangeCustomExample.title),
       ),
-      body: Center(
-        child: ValueChangeHighlight(
-          value: count,
-          // disable highlight if count changes from `null` or `2`.
-          disableFromValues: const [null, 2],
-          padding: const EdgeInsets.all(4),
-          color: Colors.yellow,
-          child: Text(
-            'count: $count',
-            style: theme.textTheme.titleLarge,
+      body: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              'This example highlights whenever count changes unless count `null` or `2`',
+            ),
           ),
-        ),
+          Expanded(
+            child: Center(
+              child: ValueChangeHighlight(
+                value: count,
+                // disable highlight if count changes from `null` or `2`.
+                disableFromValues: const [null, 2],
+                padding: const EdgeInsets.all(4),
+                color: Colors.yellow,
+                child: Text(
+                  'count: $count',
+                  style: theme.textTheme.titleLarge,
+                ),
+              ),
+            ),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
