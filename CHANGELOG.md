@@ -1,3 +1,7 @@
+## 0.1.1
+
+- Update description field in pubspec file
+
 ## 0.1.0
 
 - Update dependency constraints to sdk: '>=2.18.0 <4.0.0' flutter: '>=3.3.0'
