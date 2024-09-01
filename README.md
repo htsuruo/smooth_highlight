@@ -52,6 +52,7 @@ ValueChangeHighlight(
   value: count,
 
   // disable highlight if count changes from `null` or `2` to some value.
+  // In this counter example, `0`, `3`, won't be highlighted.
   disableFromValues: const [null, 2],
 );
 ```
