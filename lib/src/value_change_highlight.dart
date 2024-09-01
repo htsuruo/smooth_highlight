@@ -12,6 +12,7 @@ class ValueChangeHighlight<T> extends StatefulWidget {
     this.disableFromValues,
     this.padding = EdgeInsets.zero,
     this.useInitialHighLight = false,
+    this.duration = const Duration(milliseconds: 500),
   });
 
   /// The value change that triggers the highlight.
@@ -30,6 +31,7 @@ class ValueChangeHighlight<T> extends StatefulWidget {
   final bool enabled;
   final bool useInitialHighLight;
   final EdgeInsets padding;
+  final Duration duration;
 
   @override
   State<ValueChangeHighlight> createState() => _ValueChangeHighlight<T>();
@@ -65,6 +67,7 @@ class _ValueChangeHighlight<T> extends State<ValueChangeHighlight>
       enabled: _valueChanged,
       padding: widget.padding,
       color: widget.color,
+      duration: widget.duration,
       child: widget.child,
     );
   }
