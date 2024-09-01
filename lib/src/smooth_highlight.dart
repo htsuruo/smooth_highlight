@@ -8,6 +8,7 @@ class SmoothHighlight extends StatefulWidget {
     this.enabled = true,
     this.useInitialHighLight = false,
     this.padding = EdgeInsets.zero,
+    this.duration = const Duration(milliseconds: 500),
   });
 
   /// Highlight target widget.
@@ -34,6 +35,9 @@ class SmoothHighlight extends StatefulWidget {
   /// The padding of the highlight.
   final EdgeInsets padding;
 
+  /// The duration of the highlight.
+  final Duration duration;
+
   @override
   State<SmoothHighlight> createState() => _SmoothHighlightState();
 }
@@ -43,7 +47,7 @@ class _SmoothHighlightState extends State<SmoothHighlight>
   bool _disposed = false;
   late final _animationController = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 500),
+    duration: widget.duration,
   );
   late final Animation<Decoration> _animation = _animationController
       .drive(

@@ -124,6 +124,7 @@ class _ContainerExampleState extends State<_ContainerExample> {
           mainAxisSize: MainAxisSize.min,
           children: [
             SmoothHighlight(
+              duration: const Duration(seconds: 1),
               useInitialHighLight: true,
               color: Colors.yellow,
               child: Container(
