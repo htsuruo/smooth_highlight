@@ -229,7 +229,7 @@ class _ValueChangeExampleState extends State<_ValueChangeExample> {
             highlight = !highlight;
           });
         },
-        child: const Icon(Icons.refresh),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -260,7 +260,9 @@ class _ValueChangeCustomExampleState extends State<_ValueChangeCustomExample> {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              'This example highlights whenever count changes unless count `null` or `2`',
+              '''This example highlights whenever count changes unless count `null` or `2`
+              In this counter example, `0`, `3` won't be highlighted.
+              ''',
             ),
           ),
           Expanded(
@@ -286,7 +288,7 @@ class _ValueChangeCustomExampleState extends State<_ValueChangeCustomExample> {
             count == null ? count = 0 : count = count! + 1;
           });
         },
-        child: const Icon(Icons.refresh),
+        child: const Icon(Icons.add),
       ),
     );
   }

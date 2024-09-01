@@ -25,6 +25,7 @@ class ValueChangeHighlight<T> extends StatefulWidget {
   ///
   /// The values you set this property, [child] will not be highlighted when changes from these values.
   /// Ex. `disableValues: const [null, 2]` means that disable highlight if count changes from `null` or `2`.
+  /// It means `0`, `3`, won't be highlighted.
   final List<T>? disableFromValues;
   final Widget child;
   final Color color;
