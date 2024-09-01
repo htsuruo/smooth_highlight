@@ -1,3 +1,7 @@
+## 0.1.2
+
+- Add `duration` property to set custom highlight duration: #1, #2
+
 ## 0.1.1
 
 - Update description field in pubspec file

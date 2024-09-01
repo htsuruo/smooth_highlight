@@ -1,6 +1,6 @@
 name: smooth_highlight
 description: This package allows you to emphasize a specific widget by highlight animation when you want to emphasize something to your users.
-version: 0.1.1
+version: 0.1.2
 repository: https://github.com/HTsuruo/smooth_highlight
 screenshots:
   - description: 'Highlights a specific `ListTile` inside `ListView`.'
