@@ -229,7 +229,7 @@ class _ValueChangeExampleState extends State<_ValueChangeExample> {
             highlight = !highlight;
           });
         },
-        child: const Icon(Icons.refresh),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -288,7 +288,7 @@ class _ValueChangeCustomExampleState extends State<_ValueChangeCustomExample> {
             count == null ? count = 0 : count = count! + 1;
           });
         },
-        child: const Icon(Icons.refresh),
+        child: const Icon(Icons.add),
       ),
     );
   }
