@@ -16,7 +16,7 @@ You just wrap `SmoothHighlight` in your widget.
 SmoothHighlight(
   // set your custom color
   color: Colors.yellow,
-  child: Text('Hightlight'),
+  child: Text('Highlight'),
 );
 ```
 
@@ -26,6 +26,9 @@ and you can also define custom behavior.
 SmoothHighlight(
   // highlight in initState phase.
   useInitialHighLight: true,
+
+  // Set custom duration.
+  duration: const Duration(seconds: 1),
 
   // highlight whenever count is even.
   enabled: count % 2 ==0,
