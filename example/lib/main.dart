@@ -260,7 +260,9 @@ class _ValueChangeCustomExampleState extends State<_ValueChangeCustomExample> {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              'This example highlights whenever count changes unless count `null` or `2`',
+              '''This example highlights whenever count changes unless count `null` or `2`
+              It means `0`, `3`, won't be highlighted.
+              ''',
             ),
           ),
           Expanded(
