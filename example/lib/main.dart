@@ -201,6 +201,7 @@ class _ValueChangeExampleState extends State<_ValueChangeExample> {
                     value: count,
                     padding: const EdgeInsets.all(4),
                     color: Colors.yellow,
+                    duration: const Duration(milliseconds: 700),
                     child: Text(
                       'count: $count',
                       style: theme.textTheme.titleLarge,
